@@ -1,0 +1,10 @@
+{% extends 'index.html' %} 
+{% block title %}Log in{% endblock %}
+{% block content %}
+    <form action="{{ url_for('login') }}" method="POST">
+        <p>Log in to your account:</p>
+        <input type="text" name="username" placeholder="Enter your username" />
+        <input type="password" name="password" placeholder="Enter your password" />
+        <button type="submit">Log In</button>
+    </form>
+{% endblock %}

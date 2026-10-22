@@ -1,0 +1,38 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+}
+nav {
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    background-color: #13ef79;
+    padding: 1%;
+    width: fit-content;
+    margin:auto;
+    border-radius: 15px;
+}
+nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+nav a:hover {
+    color: blue;
+}
+main {
+    padding: 1%;
+}
+footer {
+    display: flex;
+    margin-top: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    background-color: #13ef79;
+}

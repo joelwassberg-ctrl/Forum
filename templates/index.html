@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Innehåll i nedanstående rad ges av specifika html-filer -->
+    <title>{% block title %}Base{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a href="/signup">Sign up</a> |
+        <a href="/login">Log in</a> 
+
+      </nav>
+    </header>
+    <!-- Innehåll i nedanstående rad ges av specifika html-filer -->
+    <main>{% block content %}{% endblock %}</main>
+    <footer>
+      <p>&copy; Founded 2026. All rights reserved.</p>
+    </footer>
+  </body>
+
 </html>
