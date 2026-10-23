@@ -2,5 +2,19 @@
 {% block title %}Log in{% endblock %}
 {% block content %}
 <p>Hello, {{ username }}!</p>
+<p>Your ID is: {{ session["person_id"] }}</p>
 <a href="/logout">Log out</a>
+<form action="{{ url_for('home') }}" method="POST">
+    <input type="text" name="topic" placeholder="Enter a topic" />
+    <input type="text" name="content" placeholder="Enter content" />
+    <button type="submit">Submit</button>
+</form>
+
+{% for p in post %}
+    <div class="post">
+        <h3>{{ p[0] }}</h3>
+        <p>{{ p[1] }}</p>
+        <p>{{ p[3] }} - {{ p[2] }}</p>
+    </div>
+{% endfor %}
 {% endblock %}
