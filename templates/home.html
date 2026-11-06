@@ -13,8 +13,24 @@
 {% for p in post %}
     <div class="post">
         <h3>{{ p[0] }}</h3>
-        <p>{{ p[1] }}</p>
+        <p class="post-body">{{ p[1] }}</p>
         <p>{{ p[3] }} - {{ p[2] }}</p>
+
+
+        {% for c in comment %}
+            {% if c[3]|int == p[4]|int %}
+                <div class="comment">
+                    <p>{{ c[0] }}</p>
+                    <p>{{ c[1] }} - {{ c[2] }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <form action="/comment" method="POST">
+            <input type="hidden" name="topicid" value="{{ p[4] }}" />
+            <input type="text" name="comment" placeholder="Comment" />
+            <button type="submit">Comment</button>
+        </form>
     </div>
 {% endfor %}
 {% endblock %}

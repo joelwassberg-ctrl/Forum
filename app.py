@@ -76,12 +76,38 @@ def home():
 
             return redirect("home")
 
-        mycursor.execute("SELECT topics.topicname, posts.body, posts.created_at, users.name FROM posts JOIN users ON posts.person_id = users.personid JOIN topics ON posts.topic_id = topics.topicid")
+        mycursor.execute("SELECT topics.topicname, posts.body, posts.created_at, users.name, topics.topicid FROM posts JOIN users ON posts.person_id = users.personid JOIN topics ON posts.topic_id = topics.topicid")
         post = mycursor.fetchall()
 
-        return render_template("home.html", username=username, post=post)
+
+        mycursor.execute("SELECT comments.body, users.name, comments.created, comments.topicid FROM comments JOIN users ON comments.user_id = users.personid JOIN topics ON comments.topicid = topics.topicid")
+        comment = mycursor.fetchall()
+        print("Comments fetched from database:")
+        print(comment)
+
+        return render_template("home.html", username=username, post=post, comment=comment)
     else:
         return redirect("login")
+
+@app.route("/comment", methods=["POST"])
+def comment():
+    if "username" in session:
+        if request.method == "POST":
+
+            comment = request.form["comment"]
+            topic = request.form["topicid"]
+            sql = "INSERT INTO comments (topicid, user_id, body) VALUES (%s, %s, %s)"
+            val = (topic, session["person_id"], comment)
+            mycursor.execute(sql, val)
+            mydb.commit()
+            return redirect("home")
+
+
+        return render_template("home.html", username=session["username"], comment=comment)
+    else:
+        return redirect("login")
+
+
 
 #result = mycursor.fetchall()
 #for x in result: print(x)
