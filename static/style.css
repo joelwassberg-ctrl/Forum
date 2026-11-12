@@ -65,3 +65,16 @@ footer {
     border-radius: 5px;
     width: fit-content;
 }
+
+.comment-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.3s;
+    background-color: linen;
+    z-index: 999;
+}
+
+.comment-list.open {
+    max-height: 100vh;
+    overflow-y: auto;
+}
