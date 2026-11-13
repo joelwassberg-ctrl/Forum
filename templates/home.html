@@ -2,13 +2,18 @@
 {% block title %}Log in{% endblock %}
 {% block content %}
 <p>Hello, {{ username }}!</p>
-<p>Your ID is: {{ session["person_id"] }}</p>
+<p>Your ID is: {{ session["person_id"] }}</p> 
+<form class="delete_account" action="{{ url_for('delete_account') }}" method="POST">
+    <button class="deleteBtn">Delete account</button>
+</form>
 <a href="/logout">Log out</a>
-<form action="{{ url_for('home') }}" method="POST">
+<form class="post-field" action="{{ url_for('home') }}" method="POST">
     <input type="text" name="topic" placeholder="Enter a topic" />
     <input type="text" name="content" placeholder="Enter content" />
     <button type="submit">Submit</button>
 </form>
+
+<p class="divider">Posts</p>
 
 {% for p in post %}
     <div class="post">

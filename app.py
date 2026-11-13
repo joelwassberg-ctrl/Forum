@@ -107,6 +107,37 @@ def comment():
     else:
         return redirect("login")
 
+@app.route("/delete_account", methods=["POST"])
+def delete_account():
+    if "username" in session:
+
+        sql = "DELETE FROM comments WHERE topicid IN (SELECT topic_id FROM posts WHERE person_id = %s)"
+        val = (session["person_id"],)
+        mycursor.execute(sql, val)
+        mydb.commit()
+
+        sql = "DELETE FROM comments WHERE user_id = %s"
+        val = (session["person_id"],)
+        mycursor.execute(sql, val)
+        mydb.commit()
+
+        sql = "DELETE FROM posts WHERE person_id = %s"
+        val = (session["person_id"],)
+        mycursor.execute(sql, val)
+        mydb.commit()
+
+        sql = "DELETE FROM topics WHERE topicid IN (SELECT topic_id FROM posts WHERE person_id = %s)"
+        val = (session["person_id"],)
+        mycursor.execute(sql, val)
+        mydb.commit()
+
+        sql = "DELETE FROM users WHERE personid = %s"
+        val = (session["person_id"],)
+        mycursor.execute(sql, val)
+        mydb.commit()
+
+        session.clear()
+        return redirect("signup")
 
 
 #result = mycursor.fetchall()
